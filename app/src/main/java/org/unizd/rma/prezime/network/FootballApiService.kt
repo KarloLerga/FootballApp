@@ -12,14 +12,14 @@ import retrofit2.http.Headers
 interface FootballApiService {
 
     @Headers(
-        "X-RapidAPI-Key: 0ccfd10ea5msh8fb67c7b8828041p15dd4fjsn5ebc3a0585ea",
+        "X-RapidAPI-Key: 5d1cd30a5bmsh45da67630d2260bp1709eajsn431b76edb7b0",
         "X-RapidAPI-Host: football98.p.rapidapi.com"
     )
     @GET("competitions")
     suspend fun getCompetitions(): ResponseBody
 
     @Headers(
-        "X-RapidAPI-Key: 0ccfd10ea5msh8fb67c7b8828041p15dd4fjsn5ebc3a0585ea",
+        "X-RapidAPI-Key: 5d1cd30a5bmsh45da67630d2260bp1709eajsn431b76edb7b0",
         "X-RapidAPI-Host: football98.p.rapidapi.com"
     )
     @GET("{championship}/table")

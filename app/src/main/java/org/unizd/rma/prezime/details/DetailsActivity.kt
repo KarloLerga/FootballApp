@@ -15,7 +15,7 @@ class DetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_details)  // Ensure this XML file exists
+        setContentView(R.layouta.activity_details)
 
         val recyclerView: RecyclerView = findViewById(R.id.recyclerViewTable)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -23,13 +23,10 @@ class DetailsActivity : AppCompatActivity() {
         val adapter = TableAdapter()
         recyclerView.adapter = adapter
 
-        // Get the championship from the Intent
         val championship = intent.getStringExtra("championship") ?: return
 
-        // Call the fetchCompetitionTable method in ViewModel
         viewModel.fetchCompetitionTable(championship)
 
-        // Observe the competitionTable LiveData
         viewModel.competitionTable.observe(this) { teams ->
             if (teams.isEmpty()) {
                 Toast.makeText(this, "No teams found", Toast.LENGTH_SHORT).show()

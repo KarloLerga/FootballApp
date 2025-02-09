@@ -31,9 +31,21 @@ class MainActivity : AppCompatActivity() {
             fetchCompetitions()
         }
 
-        val adapter = CompetitionAdapter { championship ->
+        val adapter = CompetitionAdapter { selectedChampionship ->
+            val validChampionships = viewModel.competitions.value?.map { it.name } ?: emptyList()
+
+            val formattedChampionship = validChampionships.find {
+                it.equals(selectedChampionship, ignoreCase = true)
+            }
+
+            if (formattedChampionship == null) {
+                Log.e("MainActivity", "⚠ Invalid championship name: $selectedChampionship")
+                Toast.makeText(this, "Invalid championship selected", Toast.LENGTH_SHORT).show()
+                return@CompetitionAdapter
+            }
+
             val intent = Intent(this, DetailsActivity::class.java)
-            intent.putExtra("championship", championship)
+            intent.putExtra("championship", formattedChampionship)
             startActivity(intent)
         }
         recyclerView.adapter = adapter
@@ -48,7 +60,6 @@ class MainActivity : AppCompatActivity() {
                 adapter.submitList(competitions.map { it.name })
             }
         }
-
 
         fetchCompetitions()
     }
